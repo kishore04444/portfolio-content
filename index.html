@@ -1,619 +1,537 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Kishore R | Visual Storyteller & Creative Technologist</title>
-    <!-- Google Fonts + Premium Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 (Pro style free) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- AOS Library for scroll animations (lightweight) -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Kishore R | AI Application Developer · Computer Vision · Data Engineering</title>
+<meta name="description" content="Portfolio of Kishore R, AI application developer building computer vision systems, data pipelines and full-stack apps. Projects: Intelligent Face Tracker, QueueSight, Helmet Detection, EYWA.">
+<meta name="theme-color" content="#07070a">
+<meta property="og:title" content="Kishore R | AI Application Developer">
+<meta property="og:description" content="Computer vision, data engineering and full-stack projects by Kishore R.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23e85d04'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='700' text-anchor='middle' fill='%23fff'%3EKR%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{
+  --bg:#07070a; --bg2:#0d0d13; --card:rgba(20,20,30,.62); --line:rgba(255,255,255,.08);
+  --accent:#e85d04; --accent2:#ffb703; --text:#ececf2; --muted:#a3a3b8; --dim:#6f6f86;
+  --radius:1.4rem;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.bg-fx{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+   radial-gradient(60rem 40rem at 8% -5%,rgba(232,93,4,.16),transparent 60%),
+   radial-gradient(45rem 35rem at 100% 30%,rgba(255,183,3,.07),transparent 60%),
+   radial-gradient(40rem 30rem at 0% 100%,rgba(232,93,4,.08),transparent 60%);}
+.bg-fx::after{content:"";position:absolute;inset:0;opacity:.35;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse at 50% 0,#000 10%,transparent 70%);mask-image:radial-gradient(ellipse at 50% 0,#000 10%,transparent 70%)}
+.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+section{padding:5rem 0}
+.eyebrow{font-family:'Space Grotesk',sans-serif;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem;display:flex;align-items:center;gap:.6rem}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--accent)}
+.section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.9rem,4vw,2.8rem);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-bottom:.8rem}
+.section-sub{color:var(--muted);max-width:640px;margin-bottom:2.8rem}
+.grad{background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #010101;
-            color: #ececec;
-            line-height: 1.5;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s}
+nav.scrolled{background:rgba(7,7,10,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.25rem;display:flex;align-items:center;gap:.6rem}
+.logo b{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#b83c00);font-size:.9rem;color:#fff}
+.nav-links{display:flex;gap:.3rem;list-style:none;align-items:center}
+.nav-links a{padding:.5rem .9rem;border-radius:2rem;font-size:.9rem;color:var(--muted);transition:.2s}
+.nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(232,93,4,.16)}
+.nav-cta{background:var(--accent)!important;color:#fff!important;font-weight:600}
+.nav-cta:hover{background:#ff6a14!important}
+.burger{display:none;background:none;border:1px solid var(--line);color:#fff;width:42px;height:42px;border-radius:12px;font-size:1.1rem;cursor:pointer}
 
-        /* creative gradient background */
-        .bg-glow {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 10% 20%, rgba(232, 93, 4, 0.08), transparent 70%);
-            pointer-events: none;
-            z-index: -2;
-        }
+/* HERO */
+.hero{padding-top:9rem;padding-bottom:3rem}
+.hero-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:3rem;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:.6rem;padding:.4rem 1rem;border-radius:40px;background:rgba(232,93,4,.12);border:1px solid rgba(232,93,4,.4);color:#ffb27a;font-size:.8rem;font-weight:500;margin-bottom:1.4rem}
+.badge i{color:var(--accent)}
+.dot{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 0 rgba(61,220,132,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(61,220,132,0)}100%{box-shadow:0 0 0 0 rgba(61,220,132,0)}}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.07;letter-spacing:-.03em;font-weight:700;margin-bottom:1.2rem}
+.role-line{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.1rem,2.4vw,1.5rem);color:var(--muted);margin-bottom:1.4rem;min-height:2.1rem}
+.role-line span{color:var(--accent2);transition:opacity .35s}
+.lead{color:var(--muted);font-size:1.05rem;max-width:36rem;margin-bottom:2rem}
+.btns{display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:2rem}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.5rem;border-radius:2rem;font-weight:600;font-size:.92rem;cursor:pointer;border:1px solid transparent;transition:.25s;font-family:inherit}
+.btn-primary{background:linear-gradient(95deg,var(--accent),#b83c00);color:#fff}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(232,93,4,.38)}
+.btn-ghost{border-color:rgba(255,255,255,.18);color:#fff;background:rgba(255,255,255,.03)}
+.btn-ghost:hover{border-color:var(--accent);background:rgba(232,93,4,.12);transform:translateY(-2px)}
+.socials{display:flex;gap:.8rem}
+.socials a{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);transition:.25s}
+.socials a:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:translateY(-3px)}
 
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 2rem 2rem;
-            position: relative;
-            z-index: 2;
-        }
+/* hero visual: detection viewport */
+.viewport{position:relative;aspect-ratio:4/4.2;border-radius:2rem;border:1px solid rgba(232,93,4,.35);background:linear-gradient(160deg,#14141d,#0a0a10);overflow:hidden;box-shadow:0 30px 70px -30px rgba(232,93,4,.35)}
+.viewport::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(232,93,4,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(232,93,4,.07) 1px,transparent 1px);background-size:32px 32px}
+.scan{position:absolute;left:0;right:0;height:90px;top:-90px;background:linear-gradient(180deg,transparent,rgba(232,93,4,.22),transparent);animation:scan 5s linear infinite}
+@keyframes scan{to{top:100%}}
+.vp-top{position:absolute;top:14px;left:16px;right:16px;display:flex;justify-content:space-between;font-family:'Space Grotesk',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.08em}
+.rec{color:#ff5a5a;display:flex;align-items:center;gap:.4rem}.rec::before{content:"";width:8px;height:8px;border-radius:50%;background:#ff5a5a;animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.2}}
+.box{position:absolute;border:2px solid var(--accent);border-radius:8px;animation:float 6s ease-in-out infinite}
+.box span{position:absolute;top:-22px;left:-2px;background:var(--accent);color:#fff;font-size:.62rem;font-weight:600;padding:2px 7px;border-radius:5px;font-family:'Space Grotesk',monospace;white-space:nowrap}
+.box.b1{width:30%;height:26%;left:12%;top:24%}
+.box.b2{width:24%;height:22%;left:56%;top:44%;border-color:var(--accent2);animation-delay:-2s}
+.box.b2 span{background:var(--accent2);color:#1a1200}
+.box.b3{width:20%;height:18%;left:22%;top:64%;border-color:#3ddc84;animation-delay:-4s}
+.box.b3 span{background:#3ddc84;color:#06210f}
+@keyframes float{50%{transform:translate(6px,-8px)}}
+.vp-bottom{position:absolute;bottom:14px;left:16px;right:16px;display:flex;gap:.5rem;flex-wrap:wrap}
+.vp-bottom em{font-style:normal;font-size:.66rem;padding:.2rem .6rem;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--muted);font-family:'Space Grotesk',monospace}
 
-        /* modern section titles */
-        .section-title {
-            font-size: 2.4rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 2.5rem;
-            font-family: 'Space Grotesk', monospace;
-            background: linear-gradient(135deg, #ffffff, #e85d04);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            display: inline-block;
-            border-left: 4px solid #e85d04;
-            padding-left: 1.2rem;
-        }
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3.5rem}
+.stat{padding:1.4rem 1.2rem;border-radius:var(--radius);background:var(--card);border:1px solid var(--line);text-align:center;backdrop-filter:blur(8px)}
+.stat b{display:block;font-family:'Space Grotesk',sans-serif;font-size:2.2rem;line-height:1.1}
+.stat span{font-size:.8rem;color:var(--muted)}
 
-        /* grid systems */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2.5rem;
-        }
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:start}
+.about p{color:var(--muted);margin-bottom:1rem}
+.about p strong{color:#fff;font-weight:600}
+.focus{display:grid;gap:.9rem}
+.focus>div{display:flex;gap:1rem;padding:1.1rem 1.2rem;border-radius:1.1rem;background:var(--card);border:1px solid var(--line);transition:.25s}
+.focus>div:hover{border-color:rgba(232,93,4,.5);transform:translateX(5px)}
+.focus i{color:var(--accent);font-size:1.3rem;margin-top:.2rem;width:26px;text-align:center}
+.focus h4{font-size:1rem;margin-bottom:.15rem}.focus p{font-size:.85rem;margin:0}
 
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.skill-card{padding:1.5rem;border-radius:var(--radius);background:var(--card);border:1px solid var(--line);transition:.3s}
+.skill-card:hover{border-color:rgba(232,93,4,.5);transform:translateY(-5px);box-shadow:0 18px 40px -22px rgba(232,93,4,.4)}
+.skill-card h3{display:flex;align-items:center;gap:.7rem;font-size:1.02rem;margin-bottom:1rem;font-family:'Space Grotesk',sans-serif}
+.skill-card h3 i{width:38px;height:38px;display:grid;place-items:center;border-radius:11px;background:rgba(232,93,4,.14);color:var(--accent);font-size:1rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{font-size:.78rem;padding:.3rem .8rem;border-radius:2rem;background:rgba(255,255,255,.05);border:1px solid var(--line);color:#dcdce8;transition:.2s}
+.chip:hover{background:var(--accent);border-color:var(--accent);color:#fff}
 
-        /* hero section — elevated */
-        .hero {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 3rem;
-            align-items: center;
-            margin: 1rem 0 4rem 0;
-        }
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.proj{position:relative;padding:1.8rem;border-radius:1.6rem;background:var(--card);border:1px solid var(--line);transition:.35s;overflow:hidden;display:flex;flex-direction:column;backdrop-filter:blur(6px)}
+.proj::before{content:"";position:absolute;left:0;top:0;width:4px;height:0;background:linear-gradient(var(--accent),var(--accent2));transition:height .4s}
+.proj:hover{transform:translateY(-8px);border-color:rgba(232,93,4,.55);box-shadow:0 24px 45px -22px rgba(232,93,4,.4)}
+.proj:hover::before{height:100%}
+.proj.featured{grid-column:span 2;background:linear-gradient(145deg,rgba(232,93,4,.12),rgba(20,20,30,.7));border-color:rgba(232,93,4,.35)}
+.proj-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1rem}
+.proj-ic{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;font-size:1.4rem;color:#fff;background:linear-gradient(135deg,var(--accent),#b83c00)}
+.status{font-size:.68rem;font-weight:600;padding:.25rem .7rem;border-radius:2rem;letter-spacing:.04em;white-space:nowrap}
+.status.live{background:rgba(61,220,132,.14);color:#6ff0a8;border:1px solid rgba(61,220,132,.35)}
+.status.wip{background:rgba(255,183,3,.12);color:var(--accent2);border:1px solid rgba(255,183,3,.35)}
+.status.star{background:rgba(232,93,4,.16);color:#ffa466;border:1px solid rgba(232,93,4,.45)}
+.proj h3{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;line-height:1.25;margin-bottom:.4rem}
+.proj .tagline{color:var(--accent2);font-size:.82rem;font-weight:500;margin-bottom:.8rem}
+.proj ul{list-style:none;margin:.4rem 0 1.2rem;display:grid;gap:.55rem}
+.proj li{position:relative;padding-left:1.25rem;font-size:.88rem;color:var(--muted)}
+.proj li::before{content:"";position:absolute;left:0;top:.62rem;width:7px;height:7px;border-radius:2px;background:var(--accent);transform:rotate(45deg)}
+.tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:auto}
+.tag{font-size:.7rem;font-weight:600;padding:.25rem .75rem;border-radius:2rem;background:rgba(232,93,4,.13);color:#ffa466;letter-spacing:.02em}
+.proj-link{margin-top:1rem;font-size:.85rem;color:var(--accent2);display:inline-flex;gap:.5rem;align-items:center;font-weight:600}
+.proj-link:hover{gap:.8rem}
 
-        .hero-text {
-            flex: 1.5;
-        }
+/* TIMELINE */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}
+.col-title{font-family:'Space Grotesk',sans-serif;font-size:1.25rem;margin-bottom:1.5rem;display:flex;gap:.7rem;align-items:center}
+.col-title i{color:var(--accent)}
+.timeline{position:relative;padding-left:1.8rem;border-left:2px solid rgba(232,93,4,.35)}
+.tl-item{position:relative;padding:1.4rem 1.5rem;border-radius:1.2rem;background:var(--card);border:1px solid var(--line);margin-bottom:1.2rem}
+.tl-item::before{content:"";position:absolute;left:calc(-1.8rem - 7px);top:1.7rem;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgba(232,93,4,.2)}
+.tl-date{font-size:.76rem;color:var(--accent2);font-weight:600;letter-spacing:.05em;margin-bottom:.3rem}
+.tl-item h4{font-size:1.05rem;margin-bottom:.1rem}
+.tl-org{font-size:.88rem;color:var(--muted);margin-bottom:.8rem}
+.tl-item ul{list-style:none;display:grid;gap:.45rem}
+.tl-item li{font-size:.86rem;color:var(--muted);padding-left:1.1rem;position:relative}
+.tl-item li::before{content:"›";position:absolute;left:0;color:var(--accent);font-weight:700}
+.tl-item a{color:var(--accent2)}
+.certs{display:grid;gap:.8rem;margin-top:1.6rem}
+.cert{display:flex;align-items:center;gap:1rem;padding:.9rem 1.1rem;border-radius:1rem;background:var(--card);border:1px solid var(--line);transition:.25s}
+.cert:hover{border-color:rgba(232,93,4,.5);transform:translateX(5px)}
+.cert i{color:var(--accent);font-size:1.2rem;width:26px;text-align:center}
+.cert b{display:block;font-size:.9rem;font-weight:600}.cert span{font-size:.78rem;color:var(--muted)}
 
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(232, 93, 4, 0.15);
-            backdrop-filter: blur(4px);
-            padding: 0.4rem 1rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #e85d04;
-            border: 1px solid rgba(232, 93, 4, 0.4);
-            margin-bottom: 1.5rem;
-        }
+/* CREATIVE */
+.creative{background:linear-gradient(180deg,transparent,rgba(232,93,4,.05),transparent)}
+.cr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.cr{padding:1.6rem;border-radius:var(--radius);background:var(--card);border:1px solid var(--line);transition:.3s}
+.cr:hover{border-color:rgba(232,93,4,.5);transform:translateY(-5px)}
+.cr i.big{font-size:1.8rem;color:var(--accent);margin-bottom:1rem;display:block}
+.cr h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;margin-bottom:.5rem}
+.cr p{font-size:.86rem;color:var(--muted);margin-bottom:1rem}
+.cr a.lnk{font-size:.82rem;color:var(--accent2);font-weight:600}
+.quote{margin-top:2rem;padding:1.2rem 1.5rem;border-left:3px solid var(--accent);background:rgba(255,255,255,.03);border-radius:0 1rem 1rem 0;color:#cfcfe0;font-style:italic}
 
-        .hero-name {
-            font-size: 3.8rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            margin-bottom: 1.2rem;
-            font-family: 'Space Grotesk', monospace;
-        }
+/* CONTACT */
+.contact-box{display:grid;grid-template-columns:1fr 1.15fr;gap:2.5rem;padding:2.4rem;border-radius:2rem;background:linear-gradient(145deg,rgba(232,93,4,.1),rgba(12,12,20,.8));border:1px solid rgba(232,93,4,.3);backdrop-filter:blur(12px)}
+.c-item{display:flex;align-items:center;gap:1rem;margin-top:1.1rem;transition:.2s}
+.c-item:hover{transform:translateX(5px)}
+.c-ic{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(232,93,4,.14);border:1px solid rgba(232,93,4,.45);color:var(--accent);flex:none}
+.c-item small{display:block;color:var(--dim);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
+.c-item span{font-size:.95rem;word-break:break-word}
+form input,form textarea{width:100%;padding:.95rem 1.1rem;margin-bottom:.9rem;background:rgba(0,0,0,.45);border:1px solid #2c2c3a;border-radius:1rem;font-family:inherit;font-size:.92rem;color:#fff;transition:.2s}
+form input:focus,form textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,93,4,.2)}
+.note{font-size:.74rem;color:var(--dim);margin-top:.8rem}
 
-        .hero-name span {
-            color: #e85d04;
-            border-bottom: 3px solid #e85d04;
-            display: inline-block;
-        }
+footer{border-top:1px solid var(--line);padding:2rem 0;text-align:center;color:var(--dim);font-size:.82rem}
+footer b{color:var(--accent)}
+.to-top{position:fixed;right:1.2rem;bottom:1.2rem;width:46px;height:46px;border-radius:50%;border:none;background:var(--accent);color:#fff;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;z-index:40;box-shadow:0 8px 20px rgba(232,93,4,.4)}
+.to-top.show{opacity:1;pointer-events:auto}
 
-        .hero-desc {
-            font-size: 1.08rem;
-            line-height: 1.6;
-            color: #cdcddd;
-            margin-bottom: 1.5rem;
-            max-width: 90%;
-        }
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
 
-        /* creative pillars with glassmorphism */
-        .pillars {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.2rem;
-            margin-top: 2rem;
-        }
-
-        .pillar {
-            background: rgba(20, 20, 30, 0.6);
-            backdrop-filter: blur(10px);
-            border-radius: 1.5rem;
-            padding: 1rem 1.2rem;
-            border: 1px solid rgba(232, 93, 4, 0.3);
-            transition: all 0.3s ease;
-            flex: 1;
-            min-width: 140px;
-        }
-
-        .pillar:hover {
-            border-color: #e85d04;
-            transform: translateY(-5px);
-            background: rgba(30, 30, 42, 0.8);
-        }
-
-        .pillar i {
-            font-size: 1.8rem;
-            color: #e85d04;
-            margin-bottom: 0.7rem;
-        }
-
-        .pillar h4 {
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-            font-size: 1.1rem;
-        }
-
-        .pillar p {
-            font-size: 0.8rem;
-            color: #aaa;
-        }
-
-        /* project cards modern interactive */
-        .project-card {
-            background: rgba(18, 18, 26, 0.7);
-            backdrop-filter: blur(5px);
-            border-radius: 1.8rem;
-            padding: 1.8rem;
-            border: 1px solid rgba(232, 93, 4, 0.2);
-            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 0;
-            background: #e85d04;
-            transition: height 0.4s ease;
-        }
-
-        .project-card:hover::before {
-            height: 100%;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            border-color: #e85d04;
-            background: rgba(22, 22, 32, 0.9);
-            box-shadow: 0 20px 35px -15px rgba(232, 93, 4, 0.2);
-        }
-
-        .project-icon {
-            font-size: 2.3rem;
-            color: #e85d04;
-            margin-bottom: 1.2rem;
-        }
-
-        .project-title {
-            font-weight: 700;
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-            font-family: 'Space Grotesk', monospace;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin: 1rem 0 1rem;
-        }
-
-        .tag {
-            background: rgba(232, 93, 4, 0.15);
-            padding: 0.25rem 0.9rem;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: #e85d04;
-            letter-spacing: 0.3px;
-        }
-
-        .project-desc {
-            font-size: 0.9rem;
-            color: #b9b9cc;
-            line-height: 1.5;
-        }
-
-        /* strengths / chips with icons */
-        .strengths-wrap {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
-
-        .strength-chip {
-            background: rgba(35, 35, 48, 0.7);
-            backdrop-filter: blur(4px);
-            padding: 0.6rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: #e0e0f0;
-            border: 1px solid rgba(232, 93, 4, 0.3);
-            transition: 0.2s;
-        }
-
-        .strength-chip i {
-            margin-right: 6px;
-            color: #e85d04;
-        }
-
-        .strength-chip:hover {
-            background: #e85d04;
-            color: black;
-            border-color: #e85d04;
-        }
-
-        /* contact section — futuristic */
-        .contact-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2.5rem;
-            background: rgba(12, 12, 20, 0.7);
-            backdrop-filter: blur(12px);
-            border-radius: 2rem;
-            padding: 2.2rem;
-            border: 1px solid rgba(232, 93, 4, 0.3);
-            transition: 0.2s;
-        }
-
-        .contact-left {
-            flex: 1;
-        }
-
-        .contact-right {
-            flex: 1.2;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            transition: transform 0.2s;
-        }
-
-        .contact-item:hover {
-            transform: translateX(5px);
-        }
-
-        .contact-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(232, 93, 4, 0.12);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            color: #e85d04;
-            border: 1px solid rgba(232, 93, 4, 0.5);
-        }
-
-        .contact-label {
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            color: #aaa;
-        }
-
-        .contact-link {
-            color: #f0f0ff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-            font-size: 1rem;
-        }
-
-        .contact-link:hover {
-            color: #e85d04;
-        }
-
-        form input, form textarea {
-            width: 100%;
-            padding: 1rem 1.2rem;
-            margin-bottom: 1rem;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid #2c2c3a;
-            border-radius: 1.2rem;
-            font-family: 'Inter', sans-serif;
-            color: white;
-            transition: 0.2s;
-        }
-
-        form input:focus, form textarea:focus {
-            outline: none;
-            border-color: #e85d04;
-            box-shadow: 0 0 0 3px rgba(232, 93, 4, 0.2);
-            background: rgba(10, 10, 18, 0.9);
-        }
-
-        .btn-submit {
-            background: linear-gradient(95deg, #e85d04, #b83c00);
-            border: none;
-            padding: 0.9rem 1.8rem;
-            border-radius: 2rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: auto;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.7rem;
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        .btn-submit:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 20px rgba(232, 93, 4, 0.4);
-            background: linear-gradient(95deg, #ff6a14, #e85d04);
-        }
-
-        hr {
-            margin: 3rem 0 1rem;
-            border: 0;
-            height: 1px;
-            background: linear-gradient(90deg, #e85d04, transparent, #2c2c3a);
-        }
-
-        footer {
-            text-align: center;
-            padding: 1.5rem 0;
-            color: #7c7c8f;
-            font-size: 0.8rem;
-        }
-
-        .social-floating {
-            display: flex;
-            justify-content: flex-start;
-            gap: 1.2rem;
-            margin-top: 1.8rem;
-        }
-        .social-circle {
-            background: rgba(232, 93, 4, 0.12);
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-            color: #e0e0e0;
-            font-size: 1.2rem;
-            border: 1px solid rgba(232, 93, 4, 0.3);
-        }
-        .social-circle:hover {
-            background: #e85d04;
-            color: #0a0a0a;
-            transform: translateY(-3px);
-        }
-
-        @media (max-width: 850px) {
-            .grid-2, .grid-3 {
-                grid-template-columns: 1fr;
-            }
-            .hero-name {
-                font-size: 2.6rem;
-            }
-            .hero-desc {
-                max-width: 100%;
-            }
-            .container {
-                padding: 1.5rem;
-            }
-            .section-title {
-                font-size: 1.9rem;
-            }
-        }
-    </style>
+@media (max-width:960px){
+  .hero-grid,.about-grid,.two-col,.contact-box{grid-template-columns:1fr}
+  .viewport{max-width:420px;aspect-ratio:4/3.4}
+  .skills-grid,.cr-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-grid{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:720px){
+  section{padding:3.8rem 0}
+  .burger{display:block}
+  .nav-links{position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:stretch;padding:1rem 1.5rem 1.4rem;background:#0b0b10;border-bottom:1px solid var(--line);display:none}
+  .nav-links.open{display:flex}
+  .nav-links a{display:block;padding:.8rem 1rem}
+  .skills-grid,.cr-grid,.proj-grid{grid-template-columns:1fr}
+  .proj.featured{grid-column:auto}
+  .contact-box{padding:1.5rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
 </head>
 <body>
-<div class="bg-glow"></div>
-<div class="container">
-    <!-- Hero Section with dynamic presence -->
-    <section data-aos="fade-up" data-aos-duration="800">
-        <div class="hero">
-            <div class="hero-text">
-                <div class="hero-badge">
-                    <i class="fas fa-camera-retro"></i> Visual Alchemist & Creative Technologist
-                </div>
-                <h1 class="hero-name">Kishore <span></span><br>Design · Lens · Code</h1>
-                <p class="hero-desc">I craft immersive digital experiences, brand stories, and cinematic visuals that resonate. From AI-driven platforms to authentic coffee house narratives — I blend strategy with artistry to create impact that lasts.</p>
-                <p class="hero-desc">Founder's mindset, obsessive attention to detail, and a deep love for visual storytelling. My work with <strong>Yantra AI</strong> and <strong>The South Indian Coffee House</strong> defines my range: from tech-forward design to warm, community-rooted branding.</p>
-                <div class="pillars">
-                    <div class="pillar">
-                        <i class="fas fa-gem"></i>
-                        <h4>Design Direction</h4>
-                        <p>Intuitive UI/UX, brand systems that speak</p>
-                    </div>
-                    <div class="pillar">
-                        <i class="fas fa-film"></i>
-                        <h4>Visual Storytelling</h4>
-                        <p>Photography & motion that captures emotion</p>
-                    </div>
-                    <div class="pillar">
-                        <i class="fas fa-rocket"></i>
-                        <h4>Web Innovation</h4>
-                        <p>Modern, high-performance websites</p>
-                    </div>
-                </div>
-                <div class="social-floating">
-                    <a href="https://www.instagram.com/shotbykishore" target="_blank" class="social-circle"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/kishore-r-618499283" target="_blank" class="social-circle"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/kishore04444" target="_blank" class="social-circle"><i class="fab fa-github"></i></a>
-                    <a href="mailto:kishoreragu7@gmail.com" class="social-circle"><i class="fas fa-envelope"></i></a>
-                </div>
-            </div>
-            <div style="flex:1; display: flex; justify-content: center;" data-aos="fade-left">
-                <!-- abstract creative badge rather than heavy image -->
-                <div style="background: radial-gradient(circle at 30% 20%, #e85d0422, transparent); width: 260px; height: 260px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(232,93,4,0.4); backdrop-filter: blur(12px);">
-                    <i class="fas fa-crown" style="font-size: 4rem; color: #e85d04; opacity: 0.8;"></i>
-                </div>
-            </div>
+<div class="bg-fx"></div>
+
+<nav id="nav">
+  <div class="container nav-in">
+    <a href="#home" class="logo"><b>KR</b> Kishore R</a>
+    <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links" id="links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#design">Design</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+<!-- HERO -->
+<header class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <div class="badge"><span class="dot"></span> Third-year IT student · Coimbatore, India</div>
+      <h1>I build AI systems that <span class="grad">see, count &amp; predict.</span></h1>
+      <p class="role-line">I'm Kishore, a <span id="role">AI Application Developer</span></p>
+      <p class="lead">Hands-on with Python, computer vision (YOLO, OpenCV, OCR), data pipelines and full-stack web apps. Interested in Generative AI, LLM-powered applications and AI agents.</p>
+      <div class="btns">
+        <a href="#projects" class="btn btn-primary"><i class="fas fa-arrow-down"></i> View Projects</a>
+        <a href="Kishore_R_Resume.pdf" class="btn btn-ghost" download><i class="fas fa-file-arrow-down"></i> Download Resume</a>
+      </div>
+      <div class="socials">
+        <a href="https://github.com/kishore04444" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/kishore-r-618499283" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.instagram.com/shotbykishore" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="mailto:kishoreragu7@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="reveal" aria-hidden="true">
+      <div class="viewport">
+        <div class="scan"></div>
+        <div class="vp-top"><span class="rec">LIVE · VISION</span><span>FRAME STREAM</span></div>
+        <div class="box b1"><span>face · ID 07</span></div>
+        <div class="box b2"><span>helmet</span></div>
+        <div class="box b3"><span>text · OCR</span></div>
+        <div class="vp-bottom"><em>YOLO</em><em>ByteTrack</em><em>InsightFace</em><em>OpenCV</em></div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="stats reveal">
+      <div class="stat"><b class="grad" data-count="4">4</b><span>AI &amp; data projects</span></div>
+      <div class="stat"><b class="grad" data-count="1">1</b><span>Website shipped to production</span></div>
+      <div class="stat"><b class="grad" data-count="4">4</b><span>Certifications</span></div>
+      <div class="stat"><b class="grad">7.63</b><span>CGPA (B.Tech IT)</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="container about-grid">
+    <div class="reveal">
+      <div class="eyebrow">About</div>
+      <h2 class="section-title">Turning camera feeds and message queues into <span class="grad">useful signals</span></h2>
+      <p>I'm a third-year <strong>Information Technology</strong> student at <strong>KPR Institute of Engineering and Technology</strong>, Coimbatore. I enjoy building systems that make sense of real-world data: counting unique visitors from video, spotting helmet violations in traffic images, and forecasting backlogs in Kafka and RabbitMQ.</p>
+      <p>I've also worked as a <strong>Full Stack Developer Intern</strong> at Yantra AI Solutions, where I independently designed, built and deployed the company website. Design is my second track: I bring that eye to every interface I ship.</p>
+    </div>
+    <div class="focus reveal">
+      <div><i class="fas fa-eye"></i><div><h4>Computer Vision</h4><p>YOLO detection, tracking, face embeddings, OCR.</p></div></div>
+      <div><i class="fas fa-database"></i><div><h4>Data Engineering</h4><p>Kafka, RabbitMQ, ClickHouse and metrics pipelines.</p></div></div>
+      <div><i class="fas fa-laptop-code"></i><div><h4>Full-Stack Development</h4><p>React.js, Node.js, Express.js, MySQL.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="eyebrow">Toolkit</div>
+    <h2 class="section-title reveal">Technical <span class="grad">skills</span></h2>
+    <p class="section-sub reveal">The languages, frameworks and tools I use across my projects.</p>
+    <div class="skills-grid">
+      <div class="skill-card reveal"><h3><i class="fas fa-code"></i> Programming</h3><div class="chips"><span class="chip">Python</span><span class="chip">Java</span><span class="chip">JavaScript</span><span class="chip">SQL</span></div></div>
+      <div class="skill-card reveal"><h3><i class="fas fa-eye"></i> AI &amp; Computer Vision</h3><div class="chips"><span class="chip">YOLO</span><span class="chip">ByteTrack</span><span class="chip">InsightFace (ArcFace)</span><span class="chip">OpenCV</span><span class="chip">OCR</span><span class="chip">Object Detection</span><span class="chip">Image Processing</span></div></div>
+      <div class="skill-card reveal"><h3><i class="fas fa-diagram-project"></i> Data Engineering</h3><div class="chips"><span class="chip">Apache Kafka</span><span class="chip">RabbitMQ</span><span class="chip">ClickHouse</span><span class="chip">Data Pipelines</span><span class="chip">Batch Processing</span><span class="chip">CSV Processing</span></div></div>
+      <div class="skill-card reveal"><h3><i class="fas fa-globe"></i> Web &amp; APIs</h3><div class="chips"><span class="chip">React.js</span><span class="chip">Node.js</span><span class="chip">Express.js</span><span class="chip">REST APIs</span><span class="chip">HTML5</span><span class="chip">CSS3</span></div></div>
+      <div class="skill-card reveal"><h3><i class="fas fa-database"></i> Databases</h3><div class="chips"><span class="chip">MySQL</span><span class="chip">SQLite</span><span class="chip">ClickHouse</span></div></div>
+      <div class="skill-card reveal"><h3><i class="fas fa-screwdriver-wrench"></i> Tools &amp; Simulation</h3><div class="chips"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Docker</span><span class="chip">VS Code</span><span class="chip">Raspberry Pi</span><span class="chip">VISSIM</span></div></div>
+      <div class="skill-card reveal"><h3><i class="fas fa-pen-ruler"></i> Design</h3><div class="chips"><span class="chip">Figma</span><span class="chip">Photoshop</span><span class="chip">Illustrator</span><span class="chip">Premiere Pro</span></div></div>
+      <div class="skill-card reveal"><h3><i class="fas fa-brain"></i> Core Concepts</h3><div class="chips"><span class="chip">OOP</span><span class="chip">Data Structures &amp; Algorithms</span><span class="chip">DBMS</span><span class="chip">SDLC</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="eyebrow">Work</div>
+    <h2 class="section-title reveal">Featured <span class="grad">projects</span></h2>
+    <p class="section-sub reveal">AI, computer vision and data engineering projects, plus the website I shipped during my internship.</p>
+    <div class="proj-grid">
+
+      <article class="proj featured reveal">
+        <div class="proj-head"><div class="proj-ic"><i class="fas fa-user-check"></i></div><span class="status star"><i class="fas fa-star"></i> FLAGSHIP</span></div>
+        <h3>Intelligent Face Tracker</h3>
+        <div class="tagline">Real-time unique visitor counting</div>
+        <ul>
+          <li>Real-time visitor tracker combining 2 models: YOLO face detection and ByteTrack for stable track IDs across frames.</li>
+          <li>InsightFace (ArcFace) embeddings with cosine similarity recognise returning visitors, so each person is counted once.</li>
+          <li>New visitors are registered only after consistent observations, with multiple embeddings stored per visitor for accuracy.</li>
+          <li>Visitors stored in SQLite; 2 event types (ENTRY/EXIT) logged with timestamped face images from 3 inputs: camera, video and stream.</li>
+        </ul>
+        <div class="tags"><span class="tag">YOLO</span><span class="tag">ByteTrack</span><span class="tag">InsightFace</span><span class="tag">ArcFace</span><span class="tag">SQLite</span><span class="tag">Python</span></div>
+        <a class="proj-link" href="https://github.com/kishore04444" target="_blank" rel="noopener">See code on GitHub <i class="fas fa-arrow-right"></i></a>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-head"><div class="proj-ic"><i class="fas fa-gauge-high"></i></div><span class="status wip">IN PROGRESS</span></div>
+        <h3>QueueSight</h3>
+        <div class="tagline">Intelligent queue monitoring &amp; predictive analytics</div>
+        <ul>
+          <li>Monitoring for 2 message brokers, Kafka and RabbitMQ, tracking backlogs and system health.</li>
+          <li>Metrics pipeline for 4 data types: queue depth, consumer lag, message rates and history.</li>
+          <li>3 methods: trend forecasting, anomaly detection and time-to-overflow estimation.</li>
+        </ul>
+        <div class="tags"><span class="tag">Kafka</span><span class="tag">RabbitMQ</span><span class="tag">Forecasting</span></div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-head"><div class="proj-ic"><i class="fas fa-helmet-safety"></i></div><span class="status wip">IN PROGRESS</span></div>
+        <h3>Helmet Detection &amp; Traffic Monitoring</h3>
+        <div class="tagline">AI-based road safety</div>
+        <ul>
+          <li>YOLO-based system that classifies 2 cases, helmet and no-helmet, in traffic imagery.</li>
+          <li>Vehicle-boundary logic links each helmet detection to the right vehicle.</li>
+          <li>Refining association accuracy to cut incorrect classifications.</li>
+        </ul>
+        <div class="tags"><span class="tag">YOLO</span><span class="tag">Object Detection</span><span class="tag">Python</span></div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-head"><div class="proj-ic"><i class="fas fa-universal-access"></i></div></div>
+        <h3>EYWA</h3>
+        <div class="tagline">AI assistive device for the visually impaired</div>
+        <ul>
+          <li>Real-time assistive system with 3 capabilities: OCR, object detection and text-to-speech.</li>
+          <li>Reads out detected objects and extracted text to describe the surroundings.</li>
+        </ul>
+        <div class="tags"><span class="tag">OCR</span><span class="tag">OpenCV</span><span class="tag">Text-to-Speech</span><span class="tag">Raspberry Pi</span></div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-head"><div class="proj-ic"><i class="fas fa-microchip"></i></div><span class="status live"><i class="fas fa-circle" style="font-size:.45rem"></i> LIVE</span></div>
+        <h3>Yantra AI Website</h3>
+        <div class="tagline">Internship project, concept to production</div>
+        <ul>
+          <li>Independently delivered 1 company website, from design and development to production deployment.</li>
+          <li>Responsive interface built with React.js, JavaScript, HTML and CSS.</li>
+        </ul>
+        <div class="tags"><span class="tag">React.js</span><span class="tag">JavaScript</span><span class="tag">UI/UX</span></div>
+        <a class="proj-link" href="https://www.yantraai.in" target="_blank" rel="noopener">Visit yantraai.in <i class="fas fa-arrow-up-right-from-square"></i></a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE + EDUCATION -->
+<section id="experience">
+  <div class="container two-col">
+    <div class="reveal">
+      <div class="eyebrow">Experience</div>
+      <h3 class="col-title"><i class="fas fa-briefcase"></i> Where I've worked</h3>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">JUN 2025 – JUL 2025</div>
+          <h4>Full Stack Developer Intern</h4>
+          <div class="tl-org">Yantra AI Solutions · Coimbatore</div>
+          <ul>
+            <li>Independently delivered 1 company website, from design and development to production deployment.</li>
+            <li>Created responsive web applications using 4 core web technologies: React.js, JavaScript, HTML and CSS.</li>
+            <li>Integrated frontend features and resolved UI and application-level issues.</li>
+            <li>Used Git and GitHub for version control and development workflow.</li>
+            <li><a href="https://www.yantraai.in" target="_blank" rel="noopener">yantraai.in</a></li>
+          </ul>
         </div>
-    </section>
-
-    <!-- Featured Work: interactive projects with actual links and details -->
-    <section data-aos="fade-up" data-aos-delay="100">
-        <h2 class="section-title">/ Featured Work</h2>
-        <div class="grid-3">
-            <!-- Yantra AI Website -->
-            <div class="project-card">
-                <div class="project-icon"><i class="fas fa-microchip"></i></div>
-                <div class="project-title">Yantra AI</div>
-                <div class="project-tags"><span class="tag">Web Dev</span><span class="tag">AI Branding</span><span class="tag">UI/UX</span></div>
-                <div class="project-desc">Full-stack website design & development for Yantra AI — futuristic, performance-optimized, and scalable. Reflecting next-gen innovation. <strong>Live:</strong> <a href="https://www.yantraai.in" target="_blank" style="color:#e85d04;">yantraai.in</a></div>
-            </div>
-            <!-- South Indian Coffee House -->
-            <div class="project-card">
-                <div class="project-icon"><i class="fas fa-mug-hot"></i></div>
-                <div class="project-title">South Indian Coffee House</div>
-                <div class="project-tags"><span class="tag">Brand Identity</span><span class="tag">Photography</span><span class="tag">Social Media</span></div>
-                <div class="project-desc">Visual content strategy, editorial photography & brand narrative. Captured the essence of filter coffee culture, boosting engagement and organic growth. <strong>Visit:</strong> <a href="https://www.thesouthindiancoffeehouse.com/" target="_blank" style="color:#e85d04;">thesouthindiancoffeehouse.com</a></div>
-            </div>
-            <!-- Shot by Kishore + Graphic Design -->
-            <div class="project-card">
-                <div class="project-icon"><i class="fas fa-camera"></i></div>
-                <div class="project-title">Shot by Kishore</div>
-                <div class="project-tags"><span class="tag">Photography</span><span class="tag">Creative Direction</span><span class="tag">Posters</span></div>
-                <div class="project-desc">Event campaigns, college festivals, portrait storytelling. A fusion of candid energy & cinematic lighting — visual signature that stands out.</div>
-            </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="eyebrow">Education</div>
+      <h3 class="col-title"><i class="fas fa-graduation-cap"></i> Where I study</h3>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">2023 – 2027</div>
+          <h4>B.Tech, Information Technology</h4>
+          <div class="tl-org">KPR Institute of Engineering and Technology · Coimbatore</div>
+          <ul><li>CGPA: 7.63 / 10</li></ul>
         </div>
-    </section>
+      </div>
+      <div class="certs">
+        <div class="cert"><i class="fab fa-python"></i><div><b>Python Programming Certification</b><span>Indira Institute of Coaching Centre</span></div></div>
+        <div class="cert"><i class="fab fa-aws"></i><div><b>AWS Cloud Foundations Certification</b><span>Amazon Web Services</span></div></div>
+        <div class="cert"><i class="fas fa-network-wired"></i><div><b>Networking &amp; Cybersecurity Fundamentals</b><span>Cisco Networking Academy</span></div></div>
+        <div class="cert"><i class="fas fa-user-tie"></i><div><b>Employability Skills Program</b><span>Bajaj Finserv</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Additional design strengths & creative toolkit -->
-    <section data-aos="fade-up">
-        <div style="background: rgba(15,15,24,0.6); border-radius: 2rem; padding: 2rem; border: 1px solid rgba(232,93,4,0.25);">
-            <h2 class="section-title" style="margin-bottom: 1rem;">/ Creative Arsenal</h2>
-            <div class="strengths-wrap">
-                <span class="strength-chip"><i class="fab fa-figma"></i> Figma · XD</span>
-                <span class="strength-chip"><i class="fas fa-code"></i> React · HTML/CSS</span>
-                <span class="strength-chip"><i class="fas fa-video"></i> Premiere Pro · DaVinci</span>
-                <span class="strength-chip"><i class="fas fa-camera"></i> Lightroom · Photoshop</span>
-                <span class="strength-chip"><i class="fas fa-chart-simple"></i> Brand Strategy</span>
-                <span class="strength-chip"><i class="fas fa-pen-fancy"></i> Copywriting</span>
-                <span class="strength-chip"><i class="fas fa-mobile-alt"></i> Responsive Design</span>
-                <span class="strength-chip"><i class="fas fa-users"></i> Collaborative Workshops</span>
-            </div>
-            <p style="margin-top: 1.8rem; font-size: 0.9rem; color: #b0b0c5; border-left: 2px solid #e85d04; padding-left: 1rem;">"Great design is invisible — only the feeling stays. I merge storytelling with code and visual rhythm to build memorable brands."</p>
-        </div>
-    </section>
+<!-- DESIGN -->
+<section id="design" class="creative">
+  <div class="container">
+    <div class="eyebrow">Beyond code</div>
+    <h2 class="section-title reveal">Design &amp; <span class="grad">visual storytelling</span></h2>
+    <p class="section-sub reveal">Code is one track; design and photography are the other. They keep my interfaces and projects polished.</p>
+    <div class="cr-grid">
+      <div class="cr reveal"><i class="fas fa-mug-hot big"></i><h3>South Indian Coffee House</h3><p>Brand identity, editorial photography and social media content around filter coffee culture.</p><a class="lnk" href="https://www.thesouthindiancoffeehouse.com/" target="_blank" rel="noopener">Visit site →</a></div>
+      <div class="cr reveal"><i class="fas fa-camera-retro big"></i><h3>Shot by Kishore</h3><p>Event campaigns, college festivals, portraits and posters, with a candid and cinematic look.</p><a class="lnk" href="https://www.instagram.com/shotbykishore" target="_blank" rel="noopener">@shotbykishore →</a></div>
+      <div class="cr reveal"><i class="fab fa-figma big"></i><h3>UI/UX &amp; Motion</h3><p>Interfaces in Figma, visuals in Photoshop and Illustrator, and video edits in Premiere Pro.</p><a class="lnk" href="#contact">Work with me →</a></div>
+    </div>
+    <p class="quote reveal">“Great design is invisible; only the feeling stays.”</p>
+  </div>
+</section>
 
-    <!-- Get In Touch section with real links and functional form -->
-    <section data-aos="fade-up" data-aos-delay="150">
-        <h2 class="section-title">/ Let’s Connect</h2>
-        <div class="contact-wrapper">
-            <div class="contact-left">
-                <h3 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem; font-family: 'Space Grotesk';">Collaborate & Create</h3>
-                <p style="margin-bottom: 1.5rem; color: #c2c2d6;">Whether it's a full brand transformation, a website that demands attention, or a photo series that tells a story — let's make it happen.</p>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fab fa-instagram"></i></div>
-                    <div><div class="contact-label">INSTAGRAM · VISUAL DIARY</div><a href="https://www.instagram.com/shotbykishore" target="_blank" class="contact-link">@shotbykishore</a></div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                    <div><div class="contact-label">EMAIL (direct line)</div><a href="mailto:kishoreragu7@gmail.com" class="contact-link">kishoreragu7@gmail.com</a></div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fab fa-linkedin-in"></i></div>
-                    <div><div class="contact-label">LINKEDIN · Professional</div><a href="https://www.linkedin.com/in/kishore-r-618499283" target="_blank" class="contact-link">Kishore R</a></div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fab fa-github"></i></div>
-                    <div><div class="contact-label">GITHUB · Code & Experiments</div><a href="https://github.com/kishore04444" target="_blank" class="contact-link">kishore04444</a></div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fas fa-globe"></i></div>
-                    <div><div class="contact-label">YANTRA AI</div><a href="https://www.yantraai.in" target="_blank" class="contact-link">www.yantraai.in</a></div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fas fa-coffee"></i></div>
-                    <div><div class="contact-label">SOUTH INDIAN COFFEE HOUSE</div><a href="https://www.thesouthindiancoffeehouse.com/" target="_blank" class="contact-link">thesouthindiancoffeehouse.com</a></div>
-                </div>
-            </div>
-            <div class="contact-right">
-                <form id="dynamic-contact" action="#" method="post">
-                    <input type="text" placeholder="Your name *" id="fullname" required>
-                    <input type="email" placeholder="Email address *" id="emailAddr" required>
-                    <textarea rows="4" placeholder="Tell me about your vision — project, collab, or just a creative chat..." id="msgContent" required></textarea>
-                    <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Send Message</button>
-                </form>
-                <p style="font-size: 0.7rem; margin-top: 1rem; color: #6c6c82;">* demo contact: message will be logged (simulated). I reply within 24h.</p>
-            </div>
-        </div>
-    </section>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="eyebrow">Contact</div>
+    <h2 class="section-title reveal">Let's <span class="grad">connect</span></h2>
+    <div class="contact-box reveal">
+      <div>
+        <p style="color:var(--muted)">Have an AI, computer vision or web project in mind, or an opening on your team? Send me a note and I'll get back to you.</p>
+        <a class="c-item" href="mailto:kishoreragu7@gmail.com"><div class="c-ic"><i class="fas fa-envelope"></i></div><div><small>Email</small><span>kishoreragu7@gmail.com</span></div></a>
+        <a class="c-item" href="tel:+918870460053"><div class="c-ic"><i class="fas fa-phone"></i></div><div><small>Phone</small><span>+91 88704 60053</span></div></a>
+        <a class="c-item" href="https://www.linkedin.com/in/kishore-r-618499283" target="_blank" rel="noopener"><div class="c-ic"><i class="fab fa-linkedin-in"></i></div><div><small>LinkedIn</small><span>kishore-r-618499283</span></div></a>
+        <a class="c-item" href="https://github.com/kishore04444" target="_blank" rel="noopener"><div class="c-ic"><i class="fab fa-github"></i></div><div><small>GitHub</small><span>kishore04444</span></div></a>
+        <a class="c-item" href="https://www.instagram.com/shotbykishore" target="_blank" rel="noopener"><div class="c-ic"><i class="fab fa-instagram"></i></div><div><small>Instagram</small><span>@shotbykishore</span></div></a>
+      </div>
+      <div>
+        <form id="contact-form">
+          <input type="text" id="fname" placeholder="Your name *" required autocomplete="name">
+          <input type="email" id="femail" placeholder="Your email *" required autocomplete="email">
+          <textarea id="fmsg" rows="5" placeholder="Tell me about your project or opportunity *" required></textarea>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send via email</button>
+        </form>
+        <p class="note">This opens your email app with the message ready to send.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
 
-    <hr>
-    <footer>
-        <p>© 2025 Kishore Ragu — Visual Storyteller & Creative Designer.  <span style="color:#e85d04; font-weight:600;">#ShotByKishore</span> | Building narratives that inspire.</p>
-        <p style="margin-top: 0.4rem; font-size: 0.7rem;">Design · Photography · Code — Every pixel tells a story.</p>
-    </footer>
-</div>
+<footer>
+  <div class="container">
+    <p>© <span id="yr">2026</span> Kishore R · AI Application Developer · Coimbatore, India</p>
+    <p style="margin-top:.3rem;font-size:.74rem">Built with <b>HTML, CSS &amp; JavaScript</b> · <span style="color:var(--accent)">#ShotByKishore</span></p>
+  </div>
+</footer>
 
-<!-- AOS init -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<button class="to-top" id="toTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
 <script>
-    AOS.init({ once: true, offset: 20, duration: 700 });
+(function(){
+  var nav=document.getElementById('nav'),toTop=document.getElementById('toTop');
+  function onScroll(){var y=window.scrollY;nav.classList.toggle('scrolled',y>20);toTop.classList.toggle('show',y>600)}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  toTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+  document.getElementById('yr').textContent=new Date().getFullYear();
 
-    // enhanced contact form handler with smooth experience
-    const contactForm = document.getElementById('dynamic-contact');
-    if(contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('fullname').value.trim();
-            const email = document.getElementById('emailAddr').value.trim();
-            const message = document.getElementById('msgContent').value.trim();
-            if(!name || !email || !message) {
-                alert("Please fill all fields before sending ✨");
-                return;
-            }
-            if(!email.includes('@') || !email.includes('.')) {
-                alert("Enter a valid email address, please.");
-                return;
-            }
-            // Creative console log simulation + demo success
-            console.log("📸 New creative inquiry — Portfolio");
-            console.log(`From: ${name} (${email})`);
-            console.log(`Message: ${message}`);
-            alert(`✨ Thanks ${name}! Your creative spark has been sent. I'll get back to you soon. ✨\n\n(portfolio demo — message logged)`);
-            contactForm.reset();
-        });
-    }
+  /* mobile menu */
+  var burger=document.getElementById('burger'),links=document.getElementById('links');
+  burger.addEventListener('click',function(){var o=links.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+  links.addEventListener('click',function(e){if(e.target.tagName==='A'){links.classList.remove('open');burger.setAttribute('aria-expanded','false')}});
 
-    // smooth hover and dynamic cursor effect (just for personality)
-    const cards = document.querySelectorAll('.project-card');
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transition = 'all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
-        });
-    });
+  /* reveal on scroll */
+  var els=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+    els.forEach(function(el){io.observe(el)});
+  }else{els.forEach(function(el){el.classList.add('in')})}
+
+  /* active nav link */
+  var secs=document.querySelectorAll('main section[id]'),as=document.querySelectorAll('.nav-links a:not(.nav-cta)');
+  if('IntersectionObserver' in window){
+    var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){as.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-45% 0px -50% 0px'});
+    secs.forEach(function(s){so.observe(s)});
+  }
+
+  /* rotating role */
+  var roles=['AI Application Developer','Computer Vision Developer','Data Engineering Enthusiast','Full Stack Developer'],ri=0,r=document.getElementById('role');
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    setInterval(function(){r.style.opacity=0;setTimeout(function(){ri=(ri+1)%roles.length;r.textContent=roles[ri];r.style.opacity=1},350)},2800);
+  }
+
+  /* count-up stats */
+  var counters=document.querySelectorAll('[data-count]');
+  if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var co=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(!e.isIntersecting)return;co.unobserve(e.target);
+      var t=+e.target.dataset.count,s=null;
+      function step(ts){if(!s)s=ts;var p=Math.min((ts-s)/900,1);e.target.textContent=Math.max(1,Math.round(t*p));if(p<1)requestAnimationFrame(step)}
+      requestAnimationFrame(step);
+    })},{threshold:.6});
+    counters.forEach(function(c){co.observe(c)});
+  }
+
+  /* contact form -> mailto */
+  document.getElementById('contact-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var n=document.getElementById('fname').value.trim(),m=document.getElementById('femail').value.trim(),g=document.getElementById('fmsg').value.trim();
+    var body=g+'\n\n— '+n+' ('+m+')';
+    window.location.href='mailto:kishoreragu7@gmail.com?subject='+encodeURIComponent('Portfolio enquiry from '+n)+'&body='+encodeURIComponent(body);
+  });
+})();
 </script>
 </body>
 </html>
